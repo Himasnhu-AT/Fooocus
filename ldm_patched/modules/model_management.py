@@ -1,3 +1,5 @@
+import spaces
+import spaces
 import psutil
 from enum import Enum
 from ldm_patched.modules.args_parser import args
@@ -376,6 +378,7 @@ def free_memory(memory_required, device, keep_loaded=[]):
             if mem_free_torch > mem_free_total * 0.25:
                 soft_empty_cache()
 
+@spaces.GPU
 def load_models_gpu(models, memory_required=0):
     global vram_state
 
@@ -438,7 +441,7 @@ def load_models_gpu(models, memory_required=0):
         current_loaded_models.insert(0, loaded_model)
     return
 
-
+@spaces.GPU
 def load_model_gpu(model):
     return load_models_gpu([model])
 
@@ -701,6 +704,7 @@ def is_device_mps(device):
             return True
     return False
 
+@spaces.GPU()
 def should_use_fp16(device=None, model_params=0, prioritize_performance=True):
     global directml_enabled
 

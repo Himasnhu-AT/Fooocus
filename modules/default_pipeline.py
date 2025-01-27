@@ -1,3 +1,4 @@
+import spaces
 import modules.core as core
 import os
 import torch
@@ -331,6 +332,7 @@ def get_candidate_vae(steps, switch, denoise=1.0, refiner_swap_method='joint'):
     return final_vae, final_refiner_vae
 
 
+@spaces.GPU
 @torch.no_grad()
 @torch.inference_mode()
 def process_diffusion(positive_cond, negative_cond, steps, switch, width, height, image_seed, callback, sampler_name, scheduler_name, latent=None, denoise=1.0, tiled=False, cfg_scale=7.0, refiner_swap_method='joint', disable_preview=False):

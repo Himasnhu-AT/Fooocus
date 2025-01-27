@@ -1,3 +1,4 @@
+import spaces
 import torch
 import ldm_patched.modules.clip_vision
 import safetensors.torch as sf
@@ -87,7 +88,7 @@ clip_vision: ldm_patched.modules.clip_vision.ClipVisionModel = None
 ip_negative: torch.Tensor = None
 ip_adapters: dict = {}
 
-
+@spaces.GPU
 def load_ip_adapter(clip_vision_path, ip_negative_path, ip_adapter_path):
     global clip_vision, ip_negative, ip_adapters
 
@@ -161,7 +162,7 @@ def clip_preprocess(image):
 
     return (image - mean) / std
 
-
+@process.GPU
 @torch.no_grad()
 @torch.inference_mode()
 def preprocess(img, ip_adapter_path):

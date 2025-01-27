@@ -1,3 +1,4 @@
+import spaces
 import os
 import einops
 import torch
@@ -259,7 +260,7 @@ def get_previewer(model):
 
     return preview_function
 
-
+@spaces.GPU
 @torch.no_grad()
 @torch.inference_mode()
 def ksampler(model, positive, negative, latent, seed=None, steps=30, cfg=7.0, sampler_name='dpmpp_2m_sde_gpu',

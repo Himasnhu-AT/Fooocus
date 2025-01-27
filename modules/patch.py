@@ -1,3 +1,4 @@
+import spaces
 import os
 import torch
 import time
@@ -441,7 +442,7 @@ def patched_unet_forward(self, x, timesteps=None, context=None, y=None, control=
     else:
         return self.out(h)
 
-
+@spaces.GPU
 def patched_load_models_gpu(*args, **kwargs):
     execution_start_time = time.perf_counter()
     y = ldm_patched.modules.model_management.load_models_gpu_origin(*args, **kwargs)

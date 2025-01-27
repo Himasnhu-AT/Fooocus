@@ -4,6 +4,7 @@
 # This source code is licensed under the license found in the
 # LICENSE file in the root directory of this source tree.
 
+import spaces
 import numpy as np
 import torch
 from ldm_patched.modules import model_management
@@ -177,6 +178,7 @@ class SamPredictor:
         low_res_masks = low_res_masks[0].detach().cpu().numpy()
         return masks, iou_predictions, low_res_masks
 
+    @spaces.GPU
     @torch.no_grad()
     def predict_torch(
         self,
